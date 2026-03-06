@@ -45,9 +45,40 @@ Retrieves the movie recommendations based on a specific `userId`.
 ```bash
 curl -X GET http://localhost:8080/recommendations/123
 ```
+**Example Response (Happy Path):**
+```json
+{
+    "userPreferences": {
+        "userId": "123",
+        "preferences": ["Action", "Sci-Fi"]
+    },
+    "recommendations": [
+        {
+            "movieId": 101,
+            "title": "Inception",
+            "genre": "Sci-Fi"
+        }
+    ]
+}
+```
+
 If dependencies begin failing, this endpoint dynamically triggers graceful fallbacks:
-- If `user-profile-service` goes down but `content-service` stays up, you will get mock content based on default local preferences.
+- If `user-profile-service` goes down but `content-service` stays up, you will get mock content based on default local preferences. The response will include `"fallback_triggered_for": "user-profile-service"`.
 - If both dependency circuits `OPEN`, the endpoint instantly reverts to grabbing final fail-safe recommendations from the `trending-service`.
+
+**Example Response (Critical Degradation / Both Services Failed):**
+```json
+{
+    "message": "Our recommendation service is temporarily degraded. Here are some trending movies.",
+    "trending": [
+        {
+            "movieId": 99,
+            "title": "Trending Movie 1"
+        }
+    ],
+    "fallback_triggered_for": "user-profile-service, content-service"
+}
+```
 
 ### 2. Simulate Dependencies Behavior
 Endpoints exist to alter runtime behavioral dynamics of your mock dependencies (`user-profile` or `content`). This lets you safely trigger failures to visualize the Circuit Breaker transitions.

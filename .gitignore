@@ -4,3 +4,5 @@ node_modules/
 *.log
 coverage/
 dist/
+test-output.json
+test-fallback-*.json
