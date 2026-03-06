@@ -1,0 +1,10 @@
+﻿{
+    "message":  "Our recommendation service is temporarily degraded. Here are some trending movies.",
+    "trending":  [
+                     {
+                         "movieId":  99,
+                         "title":  "Trending Movie 1"
+                     }
+                 ],
+    "fallback_triggered_for":  "user-profile-service, content-service"
+}

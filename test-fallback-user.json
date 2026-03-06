@@ -1,0 +1,22 @@
+﻿{
+    "userPreferences":  {
+                            "userId":  "1",
+                            "preferences":  [
+                                                "default-genre-1",
+                                                "default-genre-2"
+                                            ]
+                        },
+    "recommendations":  [
+                            {
+                                "movieId":  101,
+                                "title":  "Inception",
+                                "genre":  "Sci-Fi"
+                            },
+                            {
+                                "movieId":  102,
+                                "title":  "The Dark Knight",
+                                "genre":  "Action"
+                            }
+                        ],
+    "fallback_triggered_for":  "user-profile-service"
+}
